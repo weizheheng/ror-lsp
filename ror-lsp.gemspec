@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative "lib/ror/lsp/version"
+require_relative "lib/ror_lsp/version"
 
 Gem::Specification.new do |spec|
   spec.name = "ror-lsp"
-  spec.version = Ror::Lsp::VERSION
+  spec.version = RorLsp::VERSION
   spec.authors = ["Wei Zhe Heng"]
   spec.email = ["tech@weizheheng.com"]
 
@@ -28,9 +28,14 @@ Gem::Specification.new do |spec|
     end
   end
   spec.bindir = "exe"
-  spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
+  spec.executables = ["ror-lsp"]
+
   spec.require_paths = ["lib"]
 
+  spec.add_dependency("language_server-protocol", "~> 3.17.0")
+  spec.add_dependency("syntax_tree", "~> 5.0.1")
+  spec.add_dependency("zeitwerk", "~> 2.6.6")
+
   spec.add_development_dependency("debug", "~> 1.7.0")
-  spec.add_development_dependency("standardrb")
+  spec.add_development_dependency("standard", "~> 1.19.0")
 end

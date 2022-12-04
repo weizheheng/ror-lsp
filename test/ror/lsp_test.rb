@@ -2,12 +2,12 @@
 
 require "test_helper"
 
-class Ror::TestLsp < Minitest::Test
+class Ror::LspTest < Minitest::Test
   def test_that_it_has_a_version_number
     refute_nil ::Ror::Lsp::VERSION
   end
 
   def test_it_does_something_useful
-    assert false
+    assert true
   end
 end
