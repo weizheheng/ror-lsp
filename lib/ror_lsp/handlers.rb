@@ -15,6 +15,10 @@ module RorLsp
         Handler::Initialize.new(@request, @writer).call
       when "textDocument/hover"
         Handler::Hover.new(@request, @writer).call
+      when "textDocument/completion"
+        Handler::Completion.new(@request, @writer).call
+      when "completionItem/resolve"
+        Handler::CompletionItemResolve.new(@request, @writer).call
       else
         $logger.debug("Not supported method: #{method}")
       end
