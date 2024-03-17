@@ -20,7 +20,8 @@ module RorLsp
       when "completionItem/resolve"
         Handler::CompletionItemResolve.new(@request, @writer).call
       else
-        $logger.debug("Not supported method: #{method}")
+        # Do nothing here
+        # $logger.debug("Not supported method: #{method}")
       end
     end
   end

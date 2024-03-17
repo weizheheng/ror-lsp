@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency("language_server-protocol", "~> 3.17.0")
-  spec.add_dependency("syntax_tree", "~> 5.0.1")
+  spec.add_dependency("syntax_tree", "~> 6.1.1")
   spec.add_dependency("zeitwerk", "~> 2.6.6")
 
   spec.add_development_dependency("debug", "~> 1.7.0")

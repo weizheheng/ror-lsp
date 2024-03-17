@@ -10,8 +10,14 @@ module RorLsp
             *Rails::ActiveRecord.call,
             *Rails::ActiveSupport.call,
             *Rails::ActionDispatch.call,
+            *Rails::ActionView.call,
             *Rails::RailsDomTesting.call,
-            *Rails::Capybara.call
+            *Rails::Capybara.call,
+            *Rails::Minitest.call,
+            *Rails::ActionMailer.call,
+            *Rails::AbstractController.call,
+            *Rails::ActionController.call,
+            *Rails::String.call
           ]
         end
       end

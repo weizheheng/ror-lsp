@@ -10,7 +10,7 @@ require "logger"
 module RorLsp
   LSP = LanguageServer::Protocol
 
-  $logger = Logger.new("/Users/marcusheng/open-source/ruby/ror-lsp/out.log")
+  # $logger = Logger.new("/Users/marcusheng/open-source/ruby/ror-lsp/out.log")
 
   def self.run
     writer = LSP::Transport::Stdio::Writer.new

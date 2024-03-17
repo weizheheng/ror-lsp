@@ -15,14 +15,21 @@ module RorLsp::Handler
       position = @request.dig(:params, :position)
 
       uri = @request.dig(:params, :textDocument, :uri)
-      target_message = retrieve_target_message(uri, position)
+      extension = uri.split(".").last
 
-      if target_message.nil?
-        @writer.write(id: @request[:id], result: nil)
+      if extension == "rb"
+        target_message = retrieve_target_message(uri, position)
+
+        if target_message.nil?
+          @writer.write(id: @request[:id], result: nil)
+        else
+          hover_markup_content =
+            RorLsp::HoverMarkupContent.new(target_message).call
+          @writer.write(id: @request[:id], result: hover_markup_content)
+        end
       else
-        hover_markup_content =
-          RorLsp::HoverMarkupContent.new(target_message).call
-        @writer.write(id: @request[:id], result: hover_markup_content)
+        # Not supporting other languages now
+        @writer.write(id: @request[:id], result: nil)
       end
     end
 
@@ -31,6 +38,7 @@ module RorLsp::Handler
     def retrieve_target_message(uri, position)
       document = File.binread(CGI.unescape(URI.parse(uri).path))
       tree = SyntaxTree.parse(document)
+
       new_position = find_position(document, position)
 
       target, _ =
@@ -45,7 +53,7 @@ module RorLsp::Handler
     def locate_node_and_parent(parent, target_nodes, position)
       matched =
         parent.child_nodes.compact.bsearch do |child|
-          # ... is exclusing the end
+          # ... is excluding the end
           if (child.location.start_char...child.location.end_char).cover?(
             position
           )
